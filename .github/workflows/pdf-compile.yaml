@@ -1,7 +1,8 @@
 name: pdf-compile
 on:
+    workflow_dispatch:
+    pull_request:
     push:
-    # pull_request:
 jobs:
     pdf-compile:
         runs-on: ubuntu-latest
@@ -11,14 +12,3 @@ jobs:
               uses: actions/checkout@v2
             - name: PDF compile
               run: latexmk thesis.tex printable-thesis.tex
-            - name: Commit and push the compiled PDF
-              run: |
-                    git config --local user.email "action@github.com"
-                    git config --local user.name "GitHub Action"
-                    mkdir -p output
-                    mv main.pdf output/main.pdf  # sostituisci 'main.pdf' con il nome del file PDF risultante dalla compilazione
-                    git add output/main.pdf
-                    git commit -m "Add compiled PDF"
-                    git push    
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
