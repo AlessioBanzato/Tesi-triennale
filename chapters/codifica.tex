@@ -1,7 +1,7 @@
-\chapter{Codifica}
+\chapter{Codifica e test}
 \label{cap:codifica}
 
-\intro{In questo capitolo verranno esposte in modo approfondito le attività di codifica effettuate nel progetto di stage. Per ogni argomento di codifica verrà esposta la richiesta effettuata dall'azienda, e successivamente l'attività svolta.}
+\intro{In questo capitolo verranno esposte in modo approfondito le attività di codifica effettuate nel progetto di stage. Per ogni argomento di codifica verrà esposta la richiesta effettuata dall'azienda, e successivamente l'attività svolta. Al termine del capitolo è presente una breve sezione riguardante i test svolti.}
 
 \section{Autenticazione}
 
@@ -304,7 +304,7 @@ I dettagli delle singole spese presenti della lista spese della nota sono stati 
 
 \clearpage
 
-\subsection{Add spese page}
+\subsubsection{Add spese page}
 
 Per quanto riguarda la pagina di aggiunta delle spese a una nota, ho apportato le seguenti modifiche:
 \begin{enumerate}
@@ -330,3 +330,9 @@ Per quanto riguarda la pagina di aggiunta delle spese a una nota, ho apportato l
     \end{subfigure}
     \caption{Add spese page prima (sinistra) e dopo (destra) il \emph{restyling}}
 \end{figure}
+
+\section{Verifica e validazione}
+
+L'attività di verifica svolta in parallelo alla codifica si è basata principalmente sull'analisi statica del codice effettuata da Visual Studio con strumenti quali il controllo della sintassi e la segnalazione della presenza di parti di programma non raggiungibili. Insieme a questi strumenti, sono stati effettuati test manuali per verificare che le funzionalità e le aggiunte implementate svolgessero il compito previsto.\\
+A termine dell'attività di codifica, mi è stato fornito dall'amministratore di VISIONEIMPRESA un piano di test specifico per moviEXPENSE. Questo piano prevedeva test manuali svolti eseguendo l'applicazione, per verificare che tutte le richieste effettuate fossero state soddisfatte e che fossero state implementate correttamente. Non è stata dunque necessaria la creazione di test automatici.\\
+Per quanto riguarda invece la validazione del prodotto, periodicamente aggiornavo l'amministratore aziendale riguardo l'avanzamento del lavoro, e contestualmente mostravo ciò che avevo implementato o corretto, richiedendo quindi la sua approvazione. Al termine dello stage ho svolto una presentazione riassuntiva di tutto il lavoro svolto, supportata dalla documentazione realizzata, in particolare un documento tecnico riguardante le modifiche effettuate e le novità apportate, e delle slide aventi come oggetto il \emph{restyling}.
