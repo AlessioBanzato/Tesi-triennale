@@ -11,6 +11,6 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v2
             - name: Install Python Pip
-              run: apt install python3-pip && pip install Pygments
+              run: apt install -y python3-pip && pip install Pygments
             - name: PDF compile
               run: latexmk -shell-escape thesis.tex
