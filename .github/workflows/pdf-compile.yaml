@@ -16,12 +16,14 @@
 #               run: latexmk -shell-escape thesis.tex
 
 
-name: Compile LaTeX Document
+name: Compile and Publish LaTeX Document
 
 on:
   push:
     branches:
-      - main  # Puoi cambiare il branch su cui vuoi attivare il workflow
+      - main  # Cambia il branch se necessario
+    paths-ignore:
+      - 'thesis.pdf'
 
 jobs:
   build:
@@ -40,9 +42,12 @@ jobs:
     - name: Compile LaTeX document
       run: latexmk -shell-escape -pdf thesis.tex
 
-    - name: Upload PDF
-      uses: actions/upload-artifact@v3
-      with:
-        name: thesis-pdf
-        path: thesis.pdf
+    - name: Commit and Push PDF
+      run: |
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        cp thesis.pdf ./
+        git add thesis.pdf
+        git commit -m "Publish thesis PDF"
+        git push origin main
 
