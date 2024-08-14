@@ -1,16 +1,48 @@
-name: pdf-compile
+# name: pdf-compile
+# on:
+#     workflow_dispatch:
+#     pull_request:
+#     push:
+# jobs:
+#     pdf-compile:
+#         runs-on: ubuntu-latest
+#         container: aergus/latex:latest
+#         steps:
+#             - name: Checkout repository
+#               uses: actions/checkout@v2
+#             - name: Install Python Pip
+#               run: apt install -y python3-pip && pip install Pygments
+#             - name: PDF compile
+#               run: latexmk -shell-escape thesis.tex
+
+
+name: Compile LaTeX Document
+
 on:
-    workflow_dispatch:
-    pull_request:
-    push:
+  push:
+    branches:
+      - main  # Puoi cambiare il branch su cui vuoi attivare il workflow
+
 jobs:
-    pdf-compile:
-        runs-on: ubuntu-latest
-        container: aergus/latex:latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
-            - name: Install Python Pip
-              run: apt install -y python3-pip && pip install Pygments
-            - name: PDF compile
-              run: latexmk -shell-escape thesis.tex
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install TeX Live
+      run: sudo apt-get install -y texlive-full
+
+    - name: Install Pygments
+      run: sudo apt-get install -y python3-pygments
+
+    - name: Compile LaTeX document
+      run: latexmk -shell-escape -pdf thesis.tex
+
+    - name: Upload PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: thesis-pdf
+        path: thesis.pdf
+
