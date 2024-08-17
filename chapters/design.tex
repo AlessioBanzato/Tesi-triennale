@@ -1,7 +1,7 @@
 \chapter{Design}
 \label{cap:design}
 
-\intro{In questo capitolo viene descritta la struttura dell'applicazione seguendo un approccio top-down, partendo quindi dal frontend per poi passare al backend descrivendo \glox{api} e database.}
+\intro{In questo capitolo viene descritta la struttura dell'applicazione seguendo un approccio top-down, partendo quindi dal frontend per poi passare al backend descrivendo \acrog{api} e database.}
 
 \section{Premessa}
 
@@ -10,13 +10,13 @@ Ho ritenuto quindi l'approccio \emph{top-down} il più ragionevole da adottare, 
 
 \section{Panoramica}
 
-L'applicazione ha un'architettura a microservizi, come illustrato nella \figref{fig:microservizi}. Il suo funzionamento si basa su tre database (CommonDb, SysDb e il database aziendale contenente i dati da utilizzare) e due tipologie di \glox{api} (gateway e data provider).\\
-Per utilizzare l'applicazione è necessario effettuare una login. Questa utilizza le \glox{api} gateway che interrogano il CommonDb, in particolare la tabella Utente, che contiene username e password di tutti gli utenti dell'applicazione.\\
+L'applicazione ha un'architettura a microservizi, come illustrato nella \figref{fig:microservizi}. Il suo funzionamento si basa su tre database (CommonDb, SysDb e il database aziendale contenente i dati da utilizzare) e due tipologie di \acrog{api} (gateway e data provider).\\
+Per utilizzare l'applicazione è necessario effettuare una login. Questa utilizza le \acrog{api} gateway che interrogano il CommonDb, in particolare la tabella Utente, che contiene username e password di tutti gli utenti dell'applicazione.\\
 Dopo aver effettuato la login è possibile utilizzare l'app, e ogni volta che dei dati vengono caricati dal o nel database aziendale viene messa in atto la seguente procedura:
 \begin{enumerate}
-    \item l'applicazione fa una chiamata alle \glox{api} gateway;
-    \item queste ricavano dal CommonDb l'url delle \glox{api} data provider dell'azienda associata all'utente registrato;
-    \item viene effettuata una chiamata alle \glox{api} dell'azienda (\glox{api} data provider), le quali interrogano il SysDb, per ricavare i parametri di connessione al database aziendale.
+    \item l'applicazione fa una chiamata alle \acrog{api} gateway;
+    \item queste ricavano dal CommonDb l'url delle \acrog{api} data provider dell'azienda associata all'utente registrato;
+    \item viene effettuata una chiamata alle \acrog{api} dell'azienda (\acrog{api} data provider), le quali interrogano il SysDb, per ricavare i parametri di connessione al database aziendale.
 \end{enumerate}
 I dettagli dell'architettura di ogni parte dell'applicazione verranno illustrati nelle sezioni seguenti.
 
@@ -133,14 +133,14 @@ Le classi "Vm" sono utilizzate dalla ViewModel per comunicare con il Model. Hann
 
 \subsection{API}
 
-Entrambe le \glox{api} si basano su un'architettura layered a tre livelli:
+Entrambe le \acrog{api} si basano su un'architettura layered a tre livelli:
 \begin{enumerate}
     \item \textbf{Presentation layer}: livello di accesso a cui arrivano le chiamate;
     \item \textbf{Business layer}: si occupa di elaborare le chiamate ed indirizzarle al database;
     \item \textbf{Data Access layer}: livello che modella i dati del database in oggetti di dominio.
 \end{enumerate}
 
-\noindent Il funzionamento generale delle \glox{api} è il seguente:
+\noindent Il funzionamento generale delle \acrog{api} è il seguente:
 \begin{enumerate}
     \item viene effettuata una chiamata http dall'esterno (dal frontend o da un'altra API);
     \item la chiamata viene intercettata dal Controller specifico che utilizza un oggetto Service per chiamare il metodo corrispondente alla chiamata http ricevuta;
@@ -149,7 +149,7 @@ Entrambe le \glox{api} si basano su un'architettura layered a tre livelli:
     \item i dati prelevati o inseriti nel database sono modellati con un oggetto del data accesso layer.
 \end{enumerate}
 
-\noindent Di seguito è riportato il funzionamento delle \glox{api} in modo \emph{top-down} attraverso i \emph{namespace} in cui avvengono le chiamate. Dato che entrambe le \glox{api} funzionano in modo analogo, nei nomi dei \emph{namespace} sarà presente \verb+[NomeAPI]+, che potrà essere quindi "Gateway" o "DataProvider".
+\noindent Di seguito è riportato il funzionamento delle \acrog{api} in modo \emph{top-down} attraverso i \emph{namespace} in cui avvengono le chiamate. Dato che entrambe le \acrog{api} funzionano in modo analogo, nei nomi dei \emph{namespace} sarà presente \verb+[NomeAPI]+, che potrà essere quindi "Gateway" o "DataProvider".
 
 \subsubsection{MoviExpense.Api.[NomeApi].Controllers}
 
@@ -183,9 +183,9 @@ Nelle classi BL viene ricavata la stringa di connessione al database aziendale t
 
 \subsubsection{Gateway}
 
-Il funzionamento delle \glox{api} Gateway corrisponde a quello delle DataProvider solamente per effettuare Get sui dati dell'utente autenticato e per effettuare l'autenticazione (in questo caso c'è solamente una chiamata ulteriore). In tutti gli altri casi, il loro funzionamento è uguale solamente fino alla sezione riguardante i Services. Quando la chiamata arriva a una classe del \emph{namespace} MoviExpense.Api.Gateway.Services, infatti, non viene inoltrata al BL ma viene ricavato da CommonDb l'url delle \glox{api} data provider corrispondenti all'azienda dell'utente e la chiamata viene inoltrata a queste.
+Il funzionamento delle \acrog{api} Gateway corrisponde a quello delle DataProvider solamente per effettuare Get sui dati dell'utente autenticato e per effettuare l'autenticazione (in questo caso c'è solamente una chiamata ulteriore). In tutti gli altri casi, il loro funzionamento è uguale solamente fino alla sezione riguardante i Services. Quando la chiamata arriva a una classe del \emph{namespace} MoviExpense.Api.Gateway.Services, infatti, non viene inoltrata al BL ma viene ricavato da CommonDb l'url delle \acrog{api} data provider corrispondenti all'azienda dell'utente e la chiamata viene inoltrata a queste.
 
-\paragraph{Autenticazione} Come detto in precedenza, le \glox{api} gateway in caso di autenticazione funzionano allo stesso modo delle data provider, con una sola aggiunta. Quando si arriva al BL, dopo aver effettuato la query su CommonDb per verificare che l'utente esista e le credenziali siano corrette (utilizzando una classe del DAL), viene chiamato un metodo del \emph{namespace} MoviExpense.Api.Gateway.Authentication, che contiene la classe Engine. Questa classe permette la gestione dell'autenticazione JWT ed è responsabile della generazione del token di autenticazione per l'utente.
+\paragraph{Autenticazione} Come detto in precedenza, le \acrog{api} gateway in caso di autenticazione funzionano allo stesso modo delle data provider, con una sola aggiunta. Quando si arriva al BL, dopo aver effettuato la query su CommonDb per verificare che l'utente esista e le credenziali siano corrette (utilizzando una classe del DAL), viene chiamato un metodo del \emph{namespace} MoviExpense.Api.Gateway.Authentication, che contiene la classe Engine. Questa classe permette la gestione dell'autenticazione JWT ed è responsabile della generazione del token di autenticazione per l'utente.
 
 
 \subsection{Database}
@@ -199,7 +199,7 @@ Viene utilizzato per:
     \item autenticazione (tabella Utente);
     \item recupero delle informazioni dell'utente (tabella Utente);
     \item recuperare il numero di versione dell'applicazione (tabella AppInfo);
-    \item recupero dell'url delle \glox{api} data provider (tabelle UtenteAzienda e Azienda).
+    \item recupero dell'url delle \acrog{api} data provider (tabelle UtenteAzienda e Azienda).
 \end{itemize}
 
 \subsubsection{SysDb}
