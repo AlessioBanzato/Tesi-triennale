@@ -172,10 +172,10 @@ Ogni classe \texttt{Controller} ha un attributo della classe ad esso associata n
 \begin{itemize}
     \item \texttt{[Authorize]}: indica che è necessario essere autenticati per accedere alle funzionalità dell'\acrog{api};
     \item \texttt{[Route("api/[controller]")]}: specifica parte dell'url dell'\acrog{api};
-    \item \texttt{[ApiController]}: consente di abilitare gli attributi di \textit{routing}, le risposte automatiche per i codici di errore 400 e il \textit{binding} con attributi come \textt{[FromBody]}, \texttt{[FromForm]}, \dots
+    \item \texttt{[ApiController]}: consente di abilitare gli attributi di \textit{routing}, le risposte automatiche per i codici di errore 400 e il \textit{binding} con attributi come \texttt{[FromBody]}, \texttt{[FromForm]}, \dots
 \end{itemize}
 
-\noindent All'interno di ogni metodo costruiscono un oggetto di tipo \texttt{Param}, costituito da \textit{username} dell'utente e codice dell'azienda associata, e chiamano il metodo del \textt{Service} corrispondente alla chiamata ricevuta. Nel caso della \texttt{Get} inserito prima viene
+\noindent All'interno di ogni metodo costruiscono un oggetto di tipo \texttt{Param}, costituito da \textit{username} dell'utente e codice dell'azienda associata, e chiamano il metodo del \texttt{Service} corrispondente alla chiamata ricevuta. Nel caso della \texttt{Get} inserito prima viene
 chiamato \texttt{\_service.GetAll(...)}, dove \texttt{\_service} è di tipo \texttt{ISpesaService}.
 
 \subsubsection{MoviExpense.Api.[NomeApi].Services}
