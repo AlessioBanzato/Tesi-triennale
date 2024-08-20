@@ -33,7 +33,7 @@ Il \textit{frontend} di moviEXPENSE è stato realizzato con il framework Xamarin
 \begin{itemize}
     \item \textbf{Model}: contiene tutte le classi dei dati di modello, ovvero tutti i dati strutturati che appartengono al dominio dell'applicazione;
     \item \textbf{View}: si occupa della rappresentazione grafica delle informazioni. Rappresenta dunque l'interfaccia utente, occupandosi della sua struttura e della sua presentazione;
-    \item \textbf{ViewModel}: implementa le proprietà e i comandi con cui la View può effettuare dei \textit{data binding}. Presenta anche un sistema di notifiche verso la View che permette di segnalare ogni cambiamento che avviene ai dati durante l'esecuzione del programma.
+    \item \textbf{ViewModel}: implementa le proprietà e i comandi con cui la \textit{View} può effettuare dei \textit{data binding}. Presenta anche un sistema di notifiche verso la \textit{View} che permette di segnalare ogni cambiamento che avviene ai dati durante l'esecuzione del programma.
 \end{itemize}
 
 \begin{figure}[H]
@@ -86,7 +86,7 @@ Questo \textit{namespace} contiene le classi che rappresentano gli oggetti di do
 
 \subsection{MoviExpense.Views}
 
-Ogni classe di questo \textit{namespace} rappresenta una pagina dell'applicazione. Le pagine sono scritte utilizzando XAML, linguaggio prediletto di Xamarin.Forms, e per ogni file \texttt{.xaml} che definisce la struttura e l'aspetto della pagina, è presente un file \texttt{.xaml.cs} che inizializza tutte le componenti, carica le informazioni statiche nella pagina (ad esempio stringhe) e definisce i \textit{binding} con la ViewModel. Il nome di ogni file di questo \textit{namespace}, e di conseguenza ogni classe, termina con la parola "\texttt{Page}".
+Ogni classe di questo \textit{namespace} rappresenta una pagina dell'applicazione. Le pagine sono scritte utilizzando XAML, linguaggio prediletto di Xamarin.Forms, e per ogni file \texttt{.xaml} che definisce la struttura e l'aspetto della pagina, è presente un file \texttt{.xaml.cs} che inizializza tutte le componenti, carica le informazioni statiche nella pagina (ad esempio stringhe) e definisce i \textit{binding} con la \textit{ViewModel}. Il nome di ogni file di questo \textit{namespace}, e di conseguenza ogni classe, termina con la parola "\texttt{Page}".
 
 \begin{namespacedesc}
     \classdesc{LoginPage}{presenta il logo dell'applicazione e due \textit{entry} per inserire \textit{username} e \textit{password}.}
@@ -103,8 +103,8 @@ Ogni classe di questo \textit{namespace} rappresenta una pagina dell'applicazion
 
 \subsection{MoviExpense.ViewModels}
 
-Per ogni classe della View e del Model è presente una classe di ViewModel, in particolare queste sono distinte dal nome: le classi associate alla View hanno lo stesso nome che hanno nella View ma sostituiscono la parola "\texttt{Page}" finale con "\texttt{Manager}" (ad esempio a \texttt{ViewEditSpesaPage} corrisponde \texttt{ViewEditSpesaManager}), mentre quelle associate al Model hanno lo stesso nome che hanno nel Model ma preceduto da "\texttt{Vm}" (alla classe \texttt{Spesa} corrisponde la classe \texttt{VmSpesa}).\\
-Le classi "\texttt{Vm}" sono utilizzate dalla ViewModel per comunicare con il Model. Hanno come attributo un oggetto del Model di cui effettuano il \textit{property wrap}, ovvero ne gestiscono i meccanismi di modifica e accesso. Questo permette di avere una migliore sincronizzazione dei dati tra Model e View, anche grazie al meccanismo di notifica presente in queste classi. Tutte le classi della ViewModel implementano l'interfaccia \texttt{INotifyPropertyChanged}, a cui appartiene il metodo \texttt{OnPropertyChanged} che permette di notificare alla View i cambiamenti nei dati del Model, così che possano essere effettuate le modifiche necessarie all'interfaccia grafica. Di seguito è riportato un esempio di \textit{property wrapping}:
+Per ogni classe della \textit{View} e del \textit{Model} è presente una classe di \textit{ViewModel}, in particolare queste sono distinte dal nome: le classi associate alla \textit{View} hanno lo stesso nome che hanno nella \textit{View} ma sostituiscono la parola "\texttt{Page}" finale con "\texttt{Manager}" (ad esempio a \texttt{ViewEditSpesaPage} corrisponde \texttt{ViewEditSpesaManager}), mentre quelle associate al \textit{Model} hanno lo stesso nome che hanno nel \textit{Model} ma preceduto da "\texttt{Vm}" (alla classe \texttt{Spesa} corrisponde la classe \texttt{VmSpesa}).\\
+Le classi "\texttt{Vm}" sono utilizzate dalla \textit{ViewModel} per comunicare con il \textit{Model}. Hanno come attributo un oggetto del \textit{Model} di cui effettuano il \textit{property wrap}, ovvero ne gestiscono i meccanismi di modifica e accesso. Questo permette di avere una migliore sincronizzazione dei dati tra \textit{Model} e \textit{View}, anche grazie al meccanismo di notifica presente in queste classi. Tutte le classi della \textit{ViewModel} implementano l'interfaccia \texttt{INotifyPropertyChanged}, a cui appartiene il metodo \texttt{OnPropertyChanged} che permette di notificare alla \textit{View} i cambiamenti nei dati del \textit{Model}, così che possano essere effettuate le modifiche necessarie all'interfaccia grafica. Di seguito è riportato un esempio di \textit{property wrapping}:
 \begin{minted}[linenos, breaklines, frame=lines, framesep=5mm]{csharp}
     public int IdSpesa
     {
@@ -117,11 +117,11 @@ Le classi "\texttt{Vm}" sono utilizzate dalla ViewModel per comunicare con il Mo
     }
 \end{minted}
 
-\noindent Le classi "\texttt{Manager}", invece, effettuano il \textit{binding} con la View e si occupano di:
+\noindent Le classi "\texttt{Manager}", invece, effettuano il \textit{binding} con la \textit{View} e si occupano di:
 \begin{itemize}
     \item comunicare con le \acrog{api};
     \item gestire i dati non statici, ovvero di tutti i dati presi da \textit{database}, e che possono quindi subire modifiche durante l'utilizzo dell'app;
-    \item gestire i comandi inviati dalla View. Ad esempio quando si clicca l'icona per eliminare una spesa, viene chiamato un metodo di una classe "\texttt{Manager}" della ViewModel.
+    \item gestire i comandi inviati dalla \textit{View}. Ad esempio quando si clicca l'icona per eliminare una spesa, viene chiamato un metodo di una classe "\texttt{Manager}" della \textit{ViewModel}.
 \end{itemize}
 
 \vspace{1.5cm}

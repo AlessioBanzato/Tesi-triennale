@@ -28,7 +28,7 @@ Dopo aver effettuato un colloquio con l'amministratore dell'azienda, si è concl
     \item \textbf{N}: nessun allegato. Non vengono effettuati controlli di presenza/assenza e si salva in ogni caso.
 \end{itemize}
 
-\noindent La modifica del \textit{database} ha generato una serie di modifiche a cascata a partire dalle classi dei \textit{data access layer} delle \acrog{api} fino a raggiungere le classi del Model nel \textit{frontend}. Tutti i controlli vengono effettuati nel ViewModel, in particolare nella classe \texttt{ViewEditSpesaManager}, ovvero la classe ViewModel relativa alla pagina di modifica/creazione delle spese, ora è presente uno \texttt{switch} nella funzione di salvataggio della spesa appena creata o modificata.
+\noindent La modifica del \textit{database} ha generato una serie di modifiche a cascata a partire dalle classi dei \textit{data access layer} delle \acrog{api} fino a raggiungere le classi del \textit{Model} nel \textit{frontend}. Tutti i controlli vengono effettuati nel \textit{ViewModel}, in particolare nella classe \texttt{ViewEditSpesaManager}, ovvero la classe \textit{ViewModel} relativa alla pagina di modifica/creazione delle spese, ora è presente uno \texttt{switch} nella funzione di salvataggio della spesa appena creata o modificata.
 
 \begin{minted}[linenos, breaklines, frame=lines, framesep=5mm]{csharp}
     public async Task<bool> SaveSpesaAsync()
@@ -82,7 +82,7 @@ Dopo aver effettuato un colloquio con l'amministratore dell'azienda, si è concl
 \end{itemize}
 
 \noindent Il valore di questo parametro sarà poi impostato a seconda dei protocolli seguiti dall'azienda utilizzatrice.\\
-Successivamente alla creazione della tabella ho creato tutte le \acrog{api} necessarie e creato le funzioni che calcolano la data corretta in base al parametro all'interno del \textit{frontend}, in particolare nella ViewModel.
+Successivamente alla creazione della tabella ho creato tutte le \acrog{api} necessarie e creato le funzioni che calcolano la data corretta in base al parametro all'interno del \textit{frontend}, in particolare nella \textit{ViewModel}.
 
 \subsection{Stati spese e note}
 \label{cap:stati}
