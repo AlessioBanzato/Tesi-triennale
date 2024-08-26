@@ -220,3 +220,6 @@ TSWLatexianTemp*
 
 # compile script build directory
 build/
+
+# emacs auctex
+*.auctex*
