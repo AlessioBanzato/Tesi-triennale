@@ -113,7 +113,7 @@ Il nuovo sistema di stati si presenta come segue.
     \item \textbf{4}: respinta.
 \end{itemize}
 
-\noindent I valori fino al 2 compreso si aggiornano automaticamente in base a ciò che avviene alla nota, mentre il 3 e il 4 vengono aggiornati dall'amministrazione dell'azienda, che, presa una nota, può approvare o respingere le singole spese al suo interno.
+\noindent I valori fino al 2 compreso si aggiornano automaticamente in base a ciò che avviene alla nota in cui è stata inserita la spesa, mentre il 3 e il 4 vengono aggiornati dall'amministrazione dell'azienda, che, presa una nota, può approvare o respingere le singole spese al suo interno.
 
 \paragraph{Stati note}
 \begin{itemize}
@@ -127,7 +127,7 @@ Il nuovo sistema di stati si presenta come segue.
 Un cambiamento di stato in una nota causa cambiamenti di stato nelle spese che contiene, nello specifico:
 \begin{itemize}
     \item \textbf{0$\to$1}: quando una nota viene inviata, tutte le spese al suo interno passano dallo stato 1 (in nota) allo stato 2 (inviata);
-    \item \textbf{1$\to$2}: quando una nota viene approvata, tutte le spese al suo interno, ad eccezione delle spese respinte, vengono approvate, quindi passano dallo stato 2 (inviata) allo stato 3 (approvata);
+    \item \textbf{1$\to$2}: quando una nota viene approvata, tutte le spese al suo interno, ad eccezione di quelle respinte, vengono approvate, quindi passano dallo stato 2 (inviata) allo stato 3 (approvata);
     \item \textbf{1$\to$3}: quando una nota viene respinta, tutte le spese al suo interno vengono riportate allo stato 0 (non in nota) e la nota viene dunque "svuotata". La nota respinta rimane visibile all'interno dell'applicazione ma non è più modificabile. Le spese che conteneva, invece, possono essere modificate e inserite in un'altra nota.
 \end{itemize}
 
@@ -178,7 +178,7 @@ Il nuovo sistema di stati implementato doveva avere anche un riscontro grafico p
 
 \subsection{Introduzione}
 
-La motivazione principale che ha spinto alla scelta di effettuare un \textit{restyling} dell'applicazione è stata che essa si trovava ancora in uno stato primitivo sotto quell'aspetto. L'interfaccia grafica era poco curata e presentava diversi errori nella sua presentazione. Dopo aver utilizzato l'app durante le prime settimane di \textit{stage}, sono riuscito ad individuare le seguenti caratteristiche e problematiche:
+La motivazione principale che ha spinto alla scelta di effettuare un \textit{restyling} dell'applicazione è stata che essa si trovava ancora in uno stato primitivo sotto l'aspetto estetico. L'interfaccia grafica era poco curata e conteneva diversi errori nella sua presentazione. Dopo aver utilizzato l'app durante le prime settimane di \textit{stage}, sono riuscito ad individuare le seguenti caratteristiche e problematiche:
 \begin{itemize}
     \item l'interfaccia era ricca di angoli e l'aspetto generale era molto spigoloso;
     \item alcuni elementi non risultavano ben allineati, e ciò portava ad una \acrshort{ui} disordinata;
@@ -241,7 +241,7 @@ Nella pagina di \textit{login} ho aggiunto qualche dettaglio come le \textit{lab
 
 \subsubsection{\textit{Home}}
 
-Tra le implementazioni richieste durante lo \textit{stage} c'era l'inserimento di un modo per visualizzare il numero di versione dell'app nella \textit{home}. Ho scelto di implementarlo tramite una \textit{label} in basso alla pagina, e questo ha causato a cascata una serie di modifiche: in primis ho aggiunto dei margini ai pulsanti "Spese" e "Note", per poi arrotondarne gli angoli. Successivamente ho inserito una \texttt{PancakeView} superiore, arrotondato gli angoli e cambiato il colore del testo di benvenuto in bianco.
+Tra le implementazioni richieste durante lo \textit{stage} c'era l'inserimento di un modo per visualizzare il numero di versione dell'app nella \textit{home}. Ho scelto di implementarlo tramite una \textit{label} in basso alla pagina, e questo ha causato a cascata una serie di modifiche: in primis ho aggiunto dei margini ai pulsanti "Spese" e "Note", per poi arrotondarne gli angoli; successivamente ho inserito una \texttt{PancakeView} superiore, di cui ho arrotondato gli angoli inferiori, e ho cambiato il colore del testo di benvenuto in bianco.
 
 \begin{figure}[H]
     \begin{subfigure}{.5\textwidth}
@@ -252,7 +252,7 @@ Tra le implementazioni richieste durante lo \textit{stage} c'era l'inserimento d
         \centering
         \includegraphics[width=.7\columnwidth]{images/screenshot/new/home.png}\vspace{2mm}
     \end{subfigure}
-    \caption{Le tre versioni della \textit{home} page durante il \textit{restyling}}
+    \caption{Pagina \textit{home} prima (sinistra) e dopo (destra) il \textit{restyling}}
 \end{figure}
 
 
@@ -293,13 +293,13 @@ Ho riordinato ed allineato i dettagli delle singole spese presenti nella lista s
         \centering
         \includegraphics[width=.65\columnwidth]{images/screenshot/new/notaEditable.png}\vspace{2mm}
     \end{subfigure}
-    \caption{Modifica nota page prima (sinistra) e dopo (destra) il \textit{restyling}}
+    \caption{Pagina di visualizzazione e modifica nota prima (sinistra) e dopo (destra) il \textit{restyling}}
 \end{figure}
 
 \begin{wrapfigure}{r}{0.4\textwidth}
     \centering
     \includegraphics[width=.33\columnwidth]{images/screenshot/new/notaNonEditable.png}\vspace{2mm}
-    \caption{Visualizza nota page}
+    \caption{Visualizzazione nota non modificabile}
     \label{fig:nota_nonEditable}
 \end{wrapfigure}
 
@@ -338,4 +338,4 @@ Per quanto riguarda la pagina di aggiunta delle spese a una nota, ho apportato l
 
 L'attività di verifica svolta in parallelo alla codifica si è basata principalmente sull'analisi statica del codice effettuata da Visual Studio con strumenti quali il controllo della sintassi e la segnalazione della presenza di parti di programma non raggiungibili. Insieme a questi strumenti, sono stati effettuati test manuali per verificare che le funzionalità e le aggiunte implementate svolgessero il compito previsto.\\
 A termine dell'attività di codifica, mi è stato fornito dall'amministratore di VISIONEIMPRESA un piano di test specifico per moviEXPENSE. Questo piano prevedeva test manuali svolti eseguendo l'applicazione, per verificare che tutte le richieste effettuate fossero state soddisfatte e che fossero state implementate correttamente. Non è stata dunque necessaria la creazione di test automatici.\\
-Per quanto riguarda invece la validazione del prodotto, periodicamente aggiornavo l'amministratore aziendale riguardo l'avanzamento del lavoro, e contestualmente mostravo ciò che avevo implementato o corretto, richiedendo quindi la sua approvazione. Al termine dello \textit{stage} ho svolto una presentazione riassuntiva di tutto il lavoro svolto, supportata dalla documentazione realizzata, in particolare un documento tecnico riguardante le modifiche effettuate e le novità apportate, e delle slide aventi come oggetto il \textit{restyling}.
+Per quanto riguarda invece la validazione del prodotto, periodicamente aggiornavo l'amministratore aziendale riguardo l'avanzamento del lavoro, e contestualmente mostravo ciò che avevo implementato o corretto, richiedendo quindi la sua approvazione. Al termine dello \textit{stage} ho svolto una presentazione riassuntiva di tutto il lavoro svolto, supportata dalla documentazione realizzata, in particolare un documento tecnico riguardante le modifiche effettuate e le novità apportate, e delle \textit{slide} aventi come oggetto il \textit{restyling}.
